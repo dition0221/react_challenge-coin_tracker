@@ -5,7 +5,6 @@ import router from "./Router";
 
 const GlobalStyle = createGlobalStyle`
   ${reset};
-  // Custom
   * {
     box-sizing: border-box;
   }

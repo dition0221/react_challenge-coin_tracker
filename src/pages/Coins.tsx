@@ -20,6 +20,11 @@ const Title = styled.h1`
   color: ${(props) => props.theme.accentColor};
 `;
 
+const Loader = styled.span`
+  text-align: center;
+  display: block;
+`;
+
 const CoinsList = styled.ul``;
 
 const Coin = styled.li`
@@ -76,7 +81,7 @@ export default function Coins() {
       </Header>
 
       {loading ? (
-        "Loading.."
+        <Loader>Loading..</Loader>
       ) : (
         <CoinsList>
           {coins.map((coin) => (

@@ -104,11 +104,11 @@
              bgColor: "#222",
            };
            ```
-- **23-11-22 : #4.0 ~ #4.8 + #5.0 ~ #5.11 / React router v6 + Crypto tracker(1) (+ Code Challenge(3 days)[1st day])**
+- **23-11-22 : #4.0 ~ #4.8 + #5.0 ~ #5.4 / React router v6 + Crypto tracker(1) (+ Code Challenge(3 days)[1st day])**
 
 ---
 
-- **23-11-23 : #5.0 ~ #5.16 / Crypto tracker(2) (+ Code Challenge(3 days)[2nd day])**
+- **23-11-23 : #5.5 ~ #5.16 / Crypto tracker(2) (+ Code Challenge(3 days)[2nd day])**
 - **23-11-24 : #5.0 ~ #5.16 / Crypto tracker(3) (+ Code Challenge(3 days)[3rd day])**
 
 노마드 코더 정책 상 강의요약은 괜찮으나, 코드와 필기는 공개적인 곳에 올리면 안 됨.  
