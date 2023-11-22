@@ -1,25 +1,30 @@
-import { useState } from "react";
+import { createGlobalStyle } from "styled-components";
+import { RouterProvider } from "react-router-dom";
+import reset from "styled-reset";
+import router from "./Router";
+
+const GlobalStyle = createGlobalStyle`
+  ${reset};
+  // Custom
+  * {
+    box-sizing: border-box;
+  }
+  body {
+    font-family: 'Source Sans 3', sans-serif;
+    background-color: ${(props) => props.theme.bgColor};
+    color: ${(props) => props.theme.textColor};
+  }
+  a {
+    text-decoration: none;
+    color: inherit;
+  }
+`;
 
 export default function App() {
-  const [value, setValue] = useState("");
-  const onChange = (e: React.ChangeEvent<HTMLInputElement>) =>
-    setValue(e.currentTarget.value);
-  const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    console.log(`Hello, ${value}`);
-  };
-
   return (
-    <div>
-      <form onSubmit={onSubmit}>
-        <input
-          value={value}
-          onChange={onChange}
-          type="text"
-          placeholder="username"
-        />
-        <button>Log-In</button>
-      </form>
-    </div>
+    <>
+      <GlobalStyle />
+      <RouterProvider router={router} />
+    </>
   );
 }

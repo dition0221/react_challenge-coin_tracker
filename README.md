@@ -46,11 +46,11 @@
       - 추후에 색상을 바꿀 때, 하나씩 바꿀 필요없이 object만 바꿔주면 되므로 편리함
     - 설정법
       1. 'index.tsx'에서 '&lt;ThemeProvider&gt;'로 &lt;App /&gt;을 감싸주기
-         `import { ThemeProvider } from "styled-components";`
          ```
-           <ThemeProvider>
-             <App />
-           <ThemeProvider />
+         import { ThemeProvider } from "styled-components";
+         <ThemeProvider>
+           <App />
+         <ThemeProvider />
          ```
       2. '&lt;ThemeProvider&gt;'의 필수 속성인 'theme' 제공하기
          - theme 객체를 생성하고, 해당 객체를 theme속성값으로 제공해야 함
@@ -59,8 +59,57 @@
       - theme 객체들은 같은 프로퍼티명을 사용해야 함
       - 스타일링에서는 참조할 뿐임
 - **23-11-21 : #3.0 ~ #3.7 / TypeScript (+ Quiz)**
+  - TypeScript
+    - JavaScript를 기반으로 한 프로그래밍 언어
+    - 프로그래밍 언어가 작동하기 전에 타입을 확인함
+    - 컴파일 시 JavaScript로 컴파일 함
+  - CRA + TypeScript
+    - 설치법 : `npx create-react-app 경로 --template typescript`
+    - 몇 라이브러리는 TypeScript가 포함되어있지 않음
+      - `npm i -D @types/라이브러리명`을 실행해 라이브러리 추가 설치
+  - interface문
+    - object의 모양을 TS에게 설명해주는 개념
+    - 선언법 : `interface 변수명 { ... }`
+      - 키명의 접미에 '?'기호 추가 시 옵션 사항으로 설정'
+  - 병합 연산자 '??' (초기값 선언)
+    - 변수의 타입이 'null' 또는 'undefined'일 시 '??' 기호의 우측 피연산자를 반환
+  - Event Listener 사용 시 event의 타입
+    - 기본형 : `React.이벤트명<HTML요소명>`
+      - 사용할 이벤트에 커서를 올려, 이벤트의 타입을 확인 가능
+    - 'event.currentTarget' : React에서 'event.target' 대신에 사용
+  - theme + TS
+    - styled-components의 theme 객체의 타입을 선언해주어야 함
+    - 설정법
+      1. 테마의 선언 파일을 생성하기
+         - src 폴더 내에 `styled.d.ts` 파일을 생성
+         - <a href="https://styled-components.com/docs/api#typescript" target="_blank">공식문서</a>에서 코드를 복붙
+      2. 'theme' 객체의 타입 정의하기
+         - ex.
+           ```
+           import "styled-components";
+           declare module "styled-components" {
+             export interface DefaultTheme {
+               textColor: string;
+               bgColor: string;
+             }
+           }
+           ```
+      3. 'theme' 객체 생성하기
+         - 정의한 'DefaultTheme' 인터페이스를 불러와서 사용
+         - ex.
+           ```
+           import { DefaultTheme } from "styled-components";
+           export const darkTheme: DefaultTheme = {
+             textColor: "whitesmoke",
+             bgColor: "#222",
+           };
+           ```
+- **23-11-22 : #4.0 ~ #4.8 + #5.0 ~ #5.11 / React router v6 + Crypto tracker(1) (+ Code Challenge(3 days)[1st day])**
 
 ---
+
+- **23-11-23 : #5.0 ~ #5.16 / Crypto tracker(2) (+ Code Challenge(3 days)[2nd day])**
+- **23-11-24 : #5.0 ~ #5.16 / Crypto tracker(3) (+ Code Challenge(3 days)[3rd day])**
 
 노마드 코더 정책 상 강의요약은 괜찮으나, 코드와 필기는 공개적인 곳에 올리면 안 됨.  
 필기 요약지는 암호화된 .zip 파일로 저장함.
