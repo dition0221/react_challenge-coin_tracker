@@ -105,11 +105,104 @@
            };
            ```
 - **23-11-22 : #4.0 ~ #4.8 + #5.0 ~ #5.4 / React router v6 + Crypto tracker(1) (+ Code Challenge(3 days)[1st day])**
+  - BrowserRouter
+    - React-Router-Dom에서의 라우터를 만드는 클래식버전(v5)의 방법
+      - 컴포넌트 형식
+    - 사용법 : 최상위에서 &lt;BrowserRouter&gt;로 감싸주어야 함
+      - &lt;Routes&gt; 안에 &lt;Route path="경로" element={컴포넌트} /&gt;를 사용해 라우터 생성
+      - 항상 보여지는 컴포넌트는 &lt;Routes&gt; 밖에 위치
+    - ex.
+      ```
+      <BrowserRouter>
+        <Header />
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/about" element={<About />} />
+        </Routes>
+      </BrowserRouter>
+      ```
+  - createBrowserRouter
+    - v6에서의 라우터를 만드는 방법
+      - 라우터를 array 형식으로 표현
+    - 선언법
+      ```
+      const 변수명 = createBrowserRouter([
+        {
+          path: 경로,
+          element: 컴포넌트,
+        },
+        ......
+      ]);
+      ```
+    - 사용법 : `<RouterProvider router={라우터변수} />`
+    - 옵션으로 하위경로를 'children' 프로퍼티를 통해 사용 가능
+      ```
+      children: [
+        {
+          path: 경로,
+          element: 컴포넌트
+        }
+      ]
+      ```
+      - '&lt;Outlet&gt;' 컴포넌트를 통해 하위요소를 보여줌
+  - errorElement
+    - 경로가 없거나 충돌 등의 에러 시 특정 컴포넌트를 보여주도록 하는 역할
+    - 사용법 : 라우터 객체에서 'errorElement' 프로퍼티로 사용
+      - 기본형 : `errorElement: 컴포넌트`
+    - 루트에서가 아닌 컴포넌트에서 사용 시 다른 컴포넌트에서 발생하는 문제로부터 보호함
+      - 컴포넌트가 error가 발생해도, app 자체를 죽이지 않음
+  - useNavigate()
+    - 사용자를 다른 경로로 보내는 hook
+      - &lt;Link&gt;랑 같은 기능이지만, &lt;Link&gt;는 사용자가 직접 클릭해야 함
+    - 사용법
+      ```
+      const 변수명 = useNavigate(); // 선언
+      변수명(경로); // 실행
+      ```
+  - useParams()
+    - URL의 dynamic parameter(:이름)의 값을 가져오는 hook
+    - 기본형 : `const 변수명 = useParams();`
+  - useOutletContext()
+    - 상위경로에서 보낸 데이터를 &lt;Outlet&gt;(자식경로)에서 받는 hook
+    - 데이터 송신 방법 : `<Outlet context={데이터} />`
+    - 데이터 수신 방법 : `const 변수명 = useOutletContext<제네릭>();`
+  - useSearchParams()
+    - 'search 파라미터'를 읽기/수정하는 hook
+      - search 파라미터 : URL에서 '?' 뒤에 오는 파라미터
+    - 기본형 : `const [읽기변수, 수정변수] = useSearchParams();`
+      - 'useState()'와 형태가 비슷함
+    - 'URLSearchParams' 객체를 반환함
+      - 일반 JavaScript의 데이터 타입 중 하나
+      - 여러 메서드들 사용 가능
+  - createGlobalStyle
+    - styled-components에서 전역 스타일링에 대한 컴포넌트를 생성하는 함수
+    - 선언법 : `` const 변수명 = createGlobalStyle`...`; ``
+  - 즉시 실행 함수 표현(IIFE, Immediately Invoked Function Expression)
+    - 정의되자마자 즉시 실행되는 JavaScript Function
+      - 함수의 선언과 실행을 한 번에 하는 방법
+    - 기본형 : `(함수선언)();`
+    - ex.
+      ```
+      useEffect(() => {
+        (async () => {
+          const data = await (await fetch(URL경로)).json();
+          console.log(data);
+        })();
+      }, []);
+      ```
+  - &lt;Link&gt; 컴포넌트를 이용해 데이터를 보내는 방법
+    - URL을 사용하지 않고, state를 사용해 데이터를 보낼 것
+    - 송신 기본형 : `<Link to={경로} state={데이터} />`
+      - ex. `` <Link to={`${coin.id}`} state={{ name: coin.name }} /> ``
+    - 수신 기본형 : `const 변수명 = useLocation();`
+      - '변수.state'에서 데이터 확인이 가능함
+      - TypeScript의 제네릭을 지원하지 않으므로, 말미에 'as 타입'을 적어줌
+    - fetch API 보다 속도가 빠르기 때문에, app이 빠르게 동작하는 것처럼 보임
+    - &lt;Link&gt;로부터 데이터를 가져오는 것이기 때문에, URL을 입력해 직접 이동 시 데이터를 가져오지 않음에 주의
+- **23-11-23 : Crypto tracker(2) (+ Code Challenge(3 days)[2nd day])**
+- **23-11-24 : #5.5 ~ #5.16 / Crypto tracker(3) (+ Code Challenge(3 days)[3rd day])**
 
 ---
-
-- **23-11-23 : #5.5 ~ #5.16 / Crypto tracker(2) (+ Code Challenge(3 days)[2nd day])**
-- **23-11-24 : #5.0 ~ #5.16 / Crypto tracker(3) (+ Code Challenge(3 days)[3rd day])**
 
 노마드 코더 정책 상 강의요약은 괜찮으나, 코드와 필기는 공개적인 곳에 올리면 안 됨.  
 필기 요약지는 암호화된 .zip 파일로 저장함.
