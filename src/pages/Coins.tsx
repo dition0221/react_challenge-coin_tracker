@@ -3,23 +3,13 @@ import { Link } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import { fetchCoins } from "../api"; // API
 import { Helmet } from "react-helmet-async";
+// Components
+import Header from "../components/Header";
 
 const Wrapper = styled.div`
   max-width: 480px;
   padding: 0 20px;
   margin: 0 auto;
-`;
-
-const Header = styled.header`
-  height: 10vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-`;
-
-const Title = styled.h1`
-  font-size: 48px;
-  color: ${(props) => props.theme.accentColor};
 `;
 
 const Loader = styled.span`
@@ -31,17 +21,20 @@ const CoinsList = styled.ul``;
 
 const Coin = styled.li`
   background-color: whitesmoke;
-  color: ${(props) => props.theme.bgColor};
+  color: black;
   border-radius: 15px;
   margin-bottom: 10px;
-  transition: color 0.2s ease-in-out;
-  &:hover {
-    color: ${(props) => props.theme.accentColor};
-  }
+  font-size: 20px;
+  transition: all 0.2s ease-in-out;
   a {
     display: flex;
     align-items: center;
     padding: 20px;
+  }
+  &:hover,
+  &:active {
+    color: ${(props) => props.theme.textColor};
+    background-color: ${(props) => props.theme.accentColor};
   }
 `;
 
@@ -62,7 +55,7 @@ interface ICoin {
 }
 
 export default function Coins() {
-  // Fetch API
+  // Fetch API: All coins data
   const { isLoading, data } = useQuery<ICoin[]>({
     queryKey: ["All Coins"],
     queryFn: fetchCoins,
@@ -74,9 +67,7 @@ export default function Coins() {
         <title>Coins | dition0221</title>
       </Helmet>
 
-      <Header>
-        <Title>Coins</Title>
-      </Header>
+      <Header title="Coins" />
 
       {isLoading ? (
         <Loader>Loading..</Loader>

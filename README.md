@@ -2,10 +2,8 @@
 
 ### Vite + React + TypeScript로 코인 시세 웹 사이트를 만듭니다. (Challenge)
 
-##### [23-11-20 ~ 23-12-01(2주)] 챌린지.
-
 <img src="https://img.shields.io/badge/Vite-646CFF?style=flat-square&logo=vite&logoColor=white"/> <img src="https://img.shields.io/badge/React-61DAFB?style=flat-square&logo=react&logoColor=white"/> <img src="https://img.shields.io/badge/TypeScript-3178C6?style=flat-square&logo=typescript&logoColor=white"/> <img src="https://img.shields.io/badge/Styled&dash;Components-DB7093?style=flat-square&logo=styledcomponents&logoColor=white"/>  
-<img src="https://img.shields.io/badge/Node.js-339933?style=flat-square&logo=nodedotjs&logoColor=white"/> <img src="https://img.shields.io/badge/React&dash;Router-CA4245?style=flat-square&logo=reactrouter&logoColor=white"/> <img src="https://img.shields.io/badge/React&dash;Query-FF4154?style=flat-square&logo=reactquery&logoColor=white"/> <img src="https://img.shields.io/badge/React&dash;Helmet&dash;Async-61DAFB?style=flat-square&logoColor=white"/> <img src="https://img.shields.io/badge/ApexChart-00e396?style=flat-square&logoColor=white"/>
+<img src="https://img.shields.io/badge/Node.js-339933?style=flat-square&logo=nodedotjs&logoColor=white"/> <img src="https://img.shields.io/badge/React&dash;Router-CA4245?style=flat-square&logo=reactrouter&logoColor=white"/> <img src="https://img.shields.io/badge/React&dash;Query-FF4154?style=flat-square&logo=reactquery&logoColor=white"/> <img src="https://img.shields.io/badge/Recoil-3578E5?style=flat-square&logo=recoil&logoColor=white"/> <img src="https://img.shields.io/badge/React&dash;Helmet&dash;Async-61DAFB?style=flat-square&logoColor=white"/> <img src="https://img.shields.io/badge/ApexChart-00e396?style=flat-square&logoColor=white"/>
 
 ---
 
@@ -202,7 +200,13 @@
     - fetch API 보다 속도가 빠르기 때문에, app이 빠르게 동작하는 것처럼 보임
     - &lt;Link&gt;로부터 데이터를 가져오는 것이기 때문에, URL을 입력해 직접 이동 시 데이터를 가져오지 않음에 주의
 - **23-11-23 : Crypto tracker(2) (+ Code Challenge(3 days)[2nd day])**
-- **23-11-24 : #5.5 ~ #5.16 / Crypto tracker(3) (+ Code Challenge(3 days)[3rd day])**
+- **23-11-24 : #5.5 ~ #5.16 + #6.0 ~ #6.4 / Crypto tracker(3) (+ Code Challenge(3 days)[3rd day])**
+- **23-11-25 : #6.0 ~ #6.4 / Recoil + Publish**
+  - _Update_
+    - _다크/라이트 모드 토클 버튼_
+    - _홈으로 가는 버튼_
+    - _candlestick 차트 생성_
+    - _'/:coinId/price' 탭 구현_
 
 ---
 

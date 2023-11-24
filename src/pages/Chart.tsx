@@ -2,6 +2,8 @@ import { useOutletContext } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import { fetchCoinOhlcv } from "../api"; // API
 import ApexCharts from "react-apexcharts";
+import { useRecoilValue } from "recoil";
+import { isDarkAtom } from "../atoms"; // Atom
 
 interface IOutletContext {
   coinId: string;
@@ -23,6 +25,9 @@ interface ICoinOhlcv extends Array<IOhlcv> {
 }
 
 export default function Chart() {
+  // Theme
+  const isDark = useRecoilValue(isDarkAtom);
+
   // Parameter
   const { coinId } = useOutletContext<IOutletContext>(); // from <Coin>
 
@@ -38,47 +43,47 @@ export default function Chart() {
         "Loading chart.."
       ) : (
         <ApexCharts
-          type="line"
+          type="candlestick"
           series={[
             {
               name: "Price",
-              data: data?.map((v) => Number(v.close)) ?? [],
+              data: Array.isArray(data)
+                ? data?.map((v) => [
+                    v.time_close * 1000,
+                    Number(v.open),
+                    Number(v.high),
+                    Number(v.low),
+                    Number(v.close),
+                  ]) ?? []
+                : [],
             },
           ]}
           options={{
-            theme: { mode: "dark" },
+            theme: { mode: isDark ? "dark" : "light" },
             chart: {
-              height: 500,
-              width: 500,
               toolbar: { show: false },
               background: "transparent",
             },
-            grid: { show: false },
-            stroke: {
-              curve: "smooth",
-              width: 5,
-            },
-            yaxis: { show: false },
+            grid: { borderColor: isDark ? "#f5f6fa" : "#2f3640" },
             xaxis: {
-              labels: { show: false },
-              axisBorder: { show: false },
-              axisTicks: { show: false },
+              labels: { show: true, rotate: -45 },
+              axisTicks: { color: isDark ? "#f5f6fa" : "#2f3640" },
               type: "datetime",
               categories: data?.map((v) =>
                 new Date(v.time_close * 1000).toUTCString()
               ),
             },
-            fill: {
-              type: "gradient",
-              gradient: {
-                gradientToColors: ["blue"],
-                stops: [0, 100],
-              },
-            },
-            colors: ["red"],
             tooltip: {
               x: { format: "yy-MM-dd, ddd" },
-              y: { formatter: (value) => `$${value.toFixed(2)}` },
+            },
+
+            plotOptions: {
+              candlestick: {
+                colors: {
+                  upward: "#f53b57",
+                  downward: "#0fbcf9",
+                },
+              },
             },
           }}
         />

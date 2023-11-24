@@ -9,27 +9,13 @@ import {
 import styled from "styled-components";
 import { fetchCoinInfo, fetchCoinPrice } from "../api"; // API
 import { Helmet } from "react-helmet-async";
+// Components
+import Header from "../components/Header";
 
 const Wrapper = styled.div`
   max-width: 480px;
   padding: 0 20px;
   margin: 0 auto;
-`;
-
-const Header = styled.header`
-  height: 10vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-`;
-
-const Title = styled.h1`
-  max-width: 100%;
-  font-size: 36px;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-  overflow: hidden;
-  color: ${(props) => props.theme.accentColor};
 `;
 
 const Loader = styled.span`
@@ -40,7 +26,7 @@ const Loader = styled.span`
 const Overview = styled.section`
   display: flex;
   justify-content: space-between;
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: ${(props) => props.theme.bgOpacityColor};
   padding: 10px 20px;
   border-radius: 10px;
 `;
@@ -71,15 +57,22 @@ const Tabs = styled.div`
 const Tab = styled.span<{ $isActive: boolean }>`
   text-align: center;
   text-transform: uppercase;
-  font-size: 12px;
-  font-weight: 400;
-  background-color: rgba(0, 0, 0, 0.5);
-  padding: 7px 0;
+  font-size: 14px;
+  background-color: ${(props) => props.theme.bgOpacityColor};
   border-radius: 10px;
   color: ${(props) =>
     props.$isActive ? props.theme.accentColor : props.theme.textColor};
+  box-shadow: 0 0 5px 3px
+    ${(props) => (props.$isActive ? props.theme.accentColor : "none")};
+  transition: all 0.2s ease-in-out;
   a {
     display: block;
+    padding: 7px 0;
+  }
+  &:hover,
+  &:active {
+    background-color: ${(props) => props.theme.textColor};
+    color: ${(props) => props.theme.bgColor};
   }
 `;
 
@@ -111,7 +104,7 @@ interface IInfoData {
   last_data_at: string;
 }
 
-interface IPriceData {
+export interface IPriceData {
   id: string;
   name: string;
   symbol: string;
@@ -163,6 +156,7 @@ export default function Coin() {
     queryKey: [coinId, "Price"],
     queryFn: () => fetchCoinPrice(coinId),
   });
+  // !
 
   // isLoading
   const loading = infoLoading || priceLoading;
@@ -175,9 +169,7 @@ export default function Coin() {
         </title>
       </Helmet>
 
-      <Header>
-        <Title>{state?.name || infoData?.name || "Loading.."}</Title>
-      </Header>
+      <Header title={state?.name || infoData?.name || "Loading.."} />
 
       {loading ? (
         <Loader>Loading..</Loader>
@@ -219,7 +211,7 @@ export default function Coin() {
           </Tabs>
 
           {/* <Price> or <Chart> */}
-          <Outlet context={{ coinId }} />
+          <Outlet context={{ coinId, priceData }} />
         </>
       )}
     </Wrapper>
