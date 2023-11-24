@@ -2,6 +2,7 @@ import { createGlobalStyle } from "styled-components";
 import { RouterProvider } from "react-router-dom";
 import reset from "styled-reset";
 import router from "./Router";
+import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 
 const GlobalStyle = createGlobalStyle`
   ${reset};
@@ -24,6 +25,7 @@ export default function App() {
     <>
       <GlobalStyle />
       <RouterProvider router={router} />
+      <ReactQueryDevtools initialIsOpen={true} />
     </>
   );
 }

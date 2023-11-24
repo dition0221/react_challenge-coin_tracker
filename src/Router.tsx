@@ -1,6 +1,8 @@
 import { createBrowserRouter } from "react-router-dom";
 import Coin from "./pages/Coin";
 import Coins from "./pages/Coins";
+import Price from "./pages/Price";
+import Chart from "./pages/Chart";
 
 const router = createBrowserRouter([
   {
@@ -10,14 +12,24 @@ const router = createBrowserRouter([
   {
     path: "/:coinId",
     element: <Coin />,
+    children: [
+      {
+        path: "price",
+        element: <Price />,
+      },
+      {
+        path: "chart",
+        element: <Chart />,
+      },
+    ],
   },
 ]);
 
 export default router;
 
 /* 
-/ -> All coins
-/:id -> Coin Detail
-  /info
-  /chart
+/ ➡️ All coins
+/:coinId ➡️ Coin Detail
+  ↪️ /info
+  ↪️ /chart
 */

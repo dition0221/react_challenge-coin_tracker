@@ -1,6 +1,8 @@
 import styled from "styled-components";
 import { Link } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useQuery } from "@tanstack/react-query";
+import { fetchCoins } from "../api"; // API
+import { Helmet } from "react-helmet-async";
 
 const Wrapper = styled.div`
   max-width: 480px;
@@ -60,36 +62,32 @@ interface ICoin {
 }
 
 export default function Coins() {
-  const [coins, setCoins] = useState<ICoin[]>([]);
-  const [loading, setLoading] = useState(true);
-
   // Fetch API
-  useEffect(() => {
-    (async () => {
-      const data = await (
-        await fetch("https://api.coinpaprika.com/v1/coins")
-      ).json();
-      setCoins(data.slice(0, 100));
-      setLoading(false);
-    })();
-  }, []);
+  const { isLoading, data } = useQuery<ICoin[]>({
+    queryKey: ["All Coins"],
+    queryFn: fetchCoins,
+  });
 
   return (
     <Wrapper>
+      <Helmet>
+        <title>Coins | dition0221</title>
+      </Helmet>
+
       <Header>
         <Title>Coins</Title>
       </Header>
 
-      {loading ? (
+      {isLoading ? (
         <Loader>Loading..</Loader>
       ) : (
         <CoinsList>
-          {coins.map((coin) => (
+          {data?.slice(0, 100).map((coin) => (
             <Coin key={coin.id}>
               <Link to={`/${coin.id}`} state={{ name: coin.name }}>
                 <Img
                   src={`https://cryptocurrencyliveprices.com/img/${coin.id}.png`}
-                  alt=""
+                  alt="icon"
                 />
                 {coin.name} &rarr;
               </Link>
